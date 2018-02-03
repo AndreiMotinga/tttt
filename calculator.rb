@@ -5,7 +5,7 @@ class Calculator
   attr_reader :files
 
   def initialize
-    @files = Dir['./statements/*']
+    @files = Dir['./activities/*']
     @total = Hash.new(0)
   end
 
@@ -20,7 +20,7 @@ class Calculator
 
     filename = "./processed/#{File.basename file}"
     create_processed_file(filename, result)
-    create_processed_file("total.CSV", @total)
+    create_processed_file("./processed/total.CSV", @total)
   end
 
   def create_processed_file(filename, result)
@@ -40,6 +40,7 @@ class Calculator
     end
     result = Hash[result.sort]
     @total = @total.merge(result) { |_, a_value, b_value| a_value + b_value }
+    Hash[@total.sort]
     result
   end
 
